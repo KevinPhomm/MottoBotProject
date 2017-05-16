@@ -49,7 +49,7 @@ public class MottoBot extends ListenerAdapter
 
 	public static final String DEFAULT_SEARCH = "nico_robin";
 
-	public static final String VERSION = "44.0";
+	public static final String VERSION = "45.0";
 	
     private final AudioPlayerManager playerManager;
 
@@ -162,6 +162,7 @@ public class MottoBot extends ListenerAdapter
 		Hashtable<String, Pair<Instant, RandomEvent>> guildEvents = new Hashtable<String, Pair<Instant, RandomEvent>>();
 		List<String> eventGuilds = new ArrayList<String>();
 		eventGuilds.add("269163044427268096");
+		eventGuilds.add("282660507364753408");
 		
 		while (!this.stop)
 		{
@@ -178,13 +179,12 @@ public class MottoBot extends ListenerAdapter
 					{
 						if(guildEvent.getValue()==null || guildEvent.getValue().hasEnded())
 						{
-							rand = this.RNG.nextInt(100)+1;
+							rand = this.RNG.nextInt(1000)+1;
 							
-							if(rand<5) 
+							if(rand==1) 
 							{
 								RandomEvent event = new RandomEvent(g, this);
-								guildEvents.put(guildID, new Pair<Instant, RandomEvent>(Instant.now().plusSeconds(240), event));
-								this.jda.addEventListener(event);
+								guildEvents.put(guildID, new Pair<Instant, RandomEvent>(Instant.now().plusSeconds(360), event));
 								event.run();
 							}
 						}

@@ -29,6 +29,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.events.user.UserOnlineStatusUpdateEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import pokemon.Pokemon;
 
 public class TallyCounter extends ListenerAdapter {
 	private Hashtable<String, Hashtable<String, UserProgress>> userProgress;
@@ -44,6 +45,7 @@ public class TallyCounter extends ListenerAdapter {
 		this.activeGuilds = new ArrayList<String>();
 		this.activeGuilds.add("269163044427268096");// FP
 		this.activeGuilds.add("228161553986355212");// Ehreon
+		this.activeGuilds.add("282660507364753408");
 		this.bot = bot;
 		
 		try {
@@ -401,6 +403,7 @@ public class TallyCounter extends ListenerAdapter {
 				//	up.canRequestFavor = true;
 				//	up.canRequestTitleChange = true;
 				//}
+				up.pokemons = new ArrayList<Pokemon>();
 			}
 		}
 	}

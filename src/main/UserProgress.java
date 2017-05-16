@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Hashtable;
+
+import pokemon.Pokemon;
 
 public class UserProgress implements Serializable {
 	private static final long serialVersionUID = 42L;
@@ -36,6 +39,7 @@ public class UserProgress implements Serializable {
 	public Hashtable<String, Integer> commandsStats;
 	public Hashtable<String, Integer> mottoTagStats;
 	public Hashtable<Achievement, Instant> achievements;
+	public ArrayList<Pokemon> pokemons;
 	
 	public int messages;
 	public int commands;
@@ -68,6 +72,7 @@ public class UserProgress implements Serializable {
 		this.commandsStats = new Hashtable<String, Integer>();
 		this.mottoTagStats = new Hashtable<String, Integer>();
 		this.achievements = new Hashtable<Achievement, Instant>();
+		this.pokemons = new ArrayList<Pokemon>();
 		
 		this.messages = 0;
 		this.commands = 0;

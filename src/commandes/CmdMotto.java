@@ -13,6 +13,7 @@ public class CmdMotto implements Commande {
 	public CmdMotto() {
 		this.robinArmy = new ArrayList<String>();
 		this.robinArmy.add("269163044427268096"); // Freaking Potatoes
+		this.robinArmy.add("282660507364753408");
 	}
 	
 	@Override
