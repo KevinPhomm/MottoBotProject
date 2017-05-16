@@ -49,7 +49,7 @@ public class MottoBot extends ListenerAdapter
 
 	public static final String DEFAULT_SEARCH = "nico_robin";
 
-	public static final String VERSION = "45.0";
+	public static final String VERSION = "44.0.3184.1.5487.568789.24897897641897789.15679874896417897896417987498496496750";
 	
     private final AudioPlayerManager playerManager;
 
@@ -64,7 +64,7 @@ public class MottoBot extends ListenerAdapter
 	private boolean stop;
 
 	private String token;
-	
+
 	private Random RNG;
 
 	public MottoBot(String token)
