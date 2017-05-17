@@ -56,9 +56,6 @@ public class RandomEvent extends ListenerAdapter {
 	}
 
 	public void run() {
-		EmbedBuilder eb = new EmbedBuilder();
-		eb.setImage("http://www.pokepedia.fr/images/8/82/Sprite_4_d_115.png");
-		Pokemon wildPokemon = new Pokemon(PokemonSpecies.randomEncounter(this.RNG));
 		List<Member> eligibleMembers = new ArrayList<Member>();
 		for(Member m : this.guild.getMembers()) {
 			if(m.getUser().isBot() || m.getUser().isFake())
@@ -66,19 +63,27 @@ public class RandomEvent extends ListenerAdapter {
 			if(m.getOnlineStatus().equals(OnlineStatus.ONLINE))
 				eligibleMembers.add(m);
 		}
-		this.targetId = eligibleMembers.get(this.RNG.nextInt(eligibleMembers.size())).getUser().getId();
-		eb.appendDescription("<@"+this.targetId+"> est attaqué par un "+wildPokemon.species.name);
-		MessageEmbed message = eb.build();
-		this.guild.getTextChannels().get(this.RNG.nextInt(this.guild.getTextChannels().size())).sendMessage(message).queue(new Consumer<Message>() {
-			@Override
-			public void accept(Message t) {
-				RandomEvent.this.eventMessage = t;
-				t.addReaction(FoodEmotes.values()[RandomEvent.this.RNG.nextInt(FoodEmotes.values().length)].unicode).queue();
-				t.addReaction("💣").queue();
-				t.addReaction("🎊").queue();
-				RandomEvent.this.start();
-			}
-		});
+		if(eligibleMembers.size()!=0) {
+			EmbedBuilder eb = new EmbedBuilder();
+			eb.setImage("http://www.pokepedia.fr/images/8/82/Sprite_4_d_115.png");
+			Pokemon wildPokemon = new Pokemon(PokemonSpecies.randomEncounter(this.RNG));
+			this.targetId = eligibleMembers.get(this.RNG.nextInt(eligibleMembers.size())).getUser().getId();
+			eb.appendDescription("<@"+this.targetId+"> est attaqué par un "+wildPokemon.species.name);
+			MessageEmbed message = eb.build();
+			this.guild.getTextChannels().get(this.RNG.nextInt(this.guild.getTextChannels().size())).sendMessage(message).queue(new Consumer<Message>() {
+				@Override
+				public void accept(Message t) {
+					RandomEvent.this.eventMessage = t;
+					t.addReaction(FoodEmotes.values()[RandomEvent.this.RNG.nextInt(FoodEmotes.values().length)].unicode).queue();
+					t.addReaction("💣").queue();
+					t.addReaction("🎊").queue();
+					RandomEvent.this.start();
+				}
+			});
+		}
+		else {
+			this.end();
+		}
 	}
 	protected void start() {
 		this.bot.getJda().addEventListener(this);
@@ -113,8 +118,9 @@ public class RandomEvent extends ListenerAdapter {
     	}
     }
 
-	private void end() {
-		this.eventMessage.delete().queue();
+	public void end() {
+		if(this.eventMessage!=null)
+			this.eventMessage.delete().queue();
     	this.bot.getJda().removeEventListener(this);
     	this.finished = true;
 	}

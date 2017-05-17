@@ -730,12 +730,7 @@ public enum PokemonSpecies {
 	public final String name;
 	public final String formName;
 	public final int catchRate;
-	public final int baseHP;
-	public final int baseAtk;
-	public final int baseDef;
-	public final int baseSAtk;
-	public final int baseSDef;
-	public final int baseSpd;
+	public final BaseStats baseStats;
 	
 	private PokemonSpecies(int id, int formId, String name, String formName, int catchRate, int baseHP, int baseAtk, int baseDef, int baseSAtk, int baseSDef, int baseSpd) {
 		this.id = id;
@@ -743,12 +738,7 @@ public enum PokemonSpecies {
 		this.name = name;
 		this.formName = formName;
 		this.catchRate = catchRate;
-		this.baseHP = baseHP;
-		this.baseAtk = baseAtk;
-		this.baseDef = baseDef;
-		this.baseSAtk = baseSAtk;
-		this.baseSDef = baseSDef;
-		this.baseSpd = baseSpd;
+		this.baseStats = new BaseStats(baseHP, baseAtk, baseDef, baseSAtk, baseSDef, baseSpd);
 	}
 
 	public static PokemonSpecies randomEncounter(Random rng) {

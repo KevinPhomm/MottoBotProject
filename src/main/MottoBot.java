@@ -164,6 +164,39 @@ public class MottoBot extends ListenerAdapter
 		eventGuilds.add("269163044427268096");
 		eventGuilds.add("282660507364753408");
 		
+		int hp = 30;
+		int atk = 31;
+		int def = 31;
+		int speed = 31;
+		int spAtk = 30;
+		int spDef = 31;
+		System.out.println((((hp&0x1)+(2*(atk&0x1))+(4*(def&0x1))+(8*(speed&0x1))+(16*(spAtk&0x1))+(32*(spDef&0x1)))*15)/63); // grass 70
+		System.out.println((((((hp&0x2)>>1)+(2*(atk&0x2)>>1)+(4*(def&0x2)>>1)+(8*(speed&0x2)>>1)+(16*(spAtk&0x2)>>1)+(32*(spDef&0x2)>>1))*40)/63)+30);
+		hp = 14;
+		atk = 11;
+		def = 13;
+		speed = 31;
+		spAtk = 16;
+		spDef = 22;
+		System.out.println((((hp&0x1)+(2*(atk&0x1))+(4*(def&0x1))+(8*(speed&0x1))+(16*(spAtk&0x1))+(32*(spDef&0x1)))*15)/63); // ground 57
+		System.out.println((((((hp&0x2)>>1)+(2*(atk&0x2)>>1)+(4*(def&0x2)>>1)+(8*(speed&0x2)>>1)+(16*(spAtk&0x2)>>1)+(32*(spDef&0x2)>>1))*40)/63)+30); 
+		hp = 31;
+		atk = 31;
+		def = 31;
+		speed = 31;
+		spAtk = 31;
+		spDef = 31;
+		System.out.println((((hp&0x1)+(2*(atk&0x1))+(4*(def&0x1))+(8*(speed&0x1))+(16*(spAtk&0x1))+(32*(spDef&0x1)))*15)/63); // dark 70
+		System.out.println((((((hp&0x2)>>1)+(2*(atk&0x2)>>1)+(4*(def&0x2)>>1)+(8*(speed&0x2)>>1)+(16*(spAtk&0x2)>>1)+(32*(spDef&0x2)>>1))*40)/63)+30);
+		hp = 0;
+		atk = 0;
+		def = 0;
+		speed = 0;
+		spAtk = 0;
+		spDef = 0;
+		System.out.println((((hp&0x1)+(2*(atk&0x1))+(4*(def&0x1))+(8*(speed&0x1))+(16*(spAtk&0x1))+(32*(spDef&0x1)))*15)/63); // fight 30
+		System.out.println((((((hp&0x2)>>1)+(2*(atk&0x2)>>1)+(4*(def&0x2)>>1)+(8*(speed&0x2)>>1)+(16*(spAtk&0x2)>>1)+(32*(spDef&0x2)>>1))*40)/63)+30);
+		
 		while (!this.stop)
 		{
 			try {
@@ -179,13 +212,19 @@ public class MottoBot extends ListenerAdapter
 					{
 						if(guildEvent.getValue()==null || guildEvent.getValue().hasEnded())
 						{
-							rand = this.RNG.nextInt(1000)+1;
+							rand = this.RNG.nextInt(42000)+1;
 							
 							if(rand==1) 
 							{
 								RandomEvent event = new RandomEvent(g, this);
-								guildEvents.put(guildID, new Pair<Instant, RandomEvent>(Instant.now().plusSeconds(360), event));
+								guildEvents.put(guildID, new Pair<Instant, RandomEvent>(Instant.now().plusSeconds(600), event));
 								event.run();
+							}
+						}
+						else {
+							if(guildEvent.getValue()!=null && !guildEvent.getValue().hasEnded())
+							{
+								guildEvent.getValue().end();
 							}
 						}
 					}
