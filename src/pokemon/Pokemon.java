@@ -18,7 +18,17 @@ public class Pokemon implements Serializable {
 	
 	public Pokemon(PokemonSpecies base) {
 		this.species = base;
-		this.gender = Gender.GENDERLESS;
+		if(base.maleRatio==0.0 && base.femaleRatio==0.0) {
+			this.gender = Gender.GENDERLESS;
+		}
+		else {
+			if(RNG.nextDouble()>base.maleRatio) {
+				this.gender = Gender.FEMALE;
+			}
+			else {
+				this.gender = Gender.MALE;
+			}
+		}
 		this.level = RNG.nextInt(70)+1;
 		this.IVs = new IndividualValues();
 		this.EVs = new EffortValues();
@@ -28,7 +38,17 @@ public class Pokemon implements Serializable {
 	
 	public Pokemon(PokemonSpecies base, int level) {
 		this.species = base;
-		this.gender = Gender.GENDERLESS;
+		if(base.maleRatio==0.0 && base.femaleRatio==0.0) {
+			this.gender = Gender.GENDERLESS;
+		}
+		else {
+			if(RNG.nextDouble()>base.maleRatio) {
+				this.gender = Gender.FEMALE;
+			}
+			else {
+				this.gender = Gender.MALE;
+			}
+		}
 		this.level = level;
 		this.IVs = new IndividualValues();
 		this.EVs = new EffortValues();
