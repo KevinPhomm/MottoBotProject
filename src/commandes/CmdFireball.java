@@ -74,16 +74,16 @@ public class CmdFireball implements Commande {
 			msg = "<@"+target.getUser().getId()+"> a pris "+random+" de points de degats de :fire:";
 			if(target.getEffectiveName().equals(caster.getEffectiveName()))
 			{
-				eb.setTitle("*"+e.getAuthor().getName()+" is casting Fireball on himself...*", null);
+				eb.setTitle(""+e.getAuthor().getName()+" is casting Fireball on himself...", null);
 				eb.setImage(FIREBALL_SELF);
 			}
 			else
 			{
-				eb.setTitle("*"+e.getMember().getEffectiveName()+" is casting Fireball on "+target.getEffectiveName()+"...*", null);
+				eb.setTitle(e.getMember().getEffectiveName()+" is casting Fireball on "+target.getEffectiveName()+"...", null);
 				if (random == 0)
 				{
 					eb.setImage(FIREBALL_NULL);
-					msg = "<@"+caster.getEffectiveName()+"> est à court de Magie et fait "+random+" dégats";
+					msg = "<@"+caster.getUser().getId()+"> est à court de Magie et fait "+random+" dégats";
 				}
 				// la bonne blague
 				else if (random == 6)
@@ -99,7 +99,7 @@ public class CmdFireball implements Commande {
 				else if (random < 5)
 				{
 					eb.setImage(FIREBALL_FAIL);
-					msg = "<@"+caster.getEffectiveName()+">, le sous-mage, a seulement infligé "+random+" dégats de feu à <@"+target.getUser().getId()+">";
+					msg = "<@"+caster.getUser().getId()+">, le sous-mage, a seulement infligé "+random+" dégats de feu à <@"+target.getUser().getId()+">";
 				}
 				else if (random < 10)
 				{
